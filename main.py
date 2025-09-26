@@ -1,13 +1,18 @@
 import pygame
 from movingobject import *
+from button import *
 
 # set up pygame
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-circle = 0
 dt = 0
+
+# initiate objects
+obj = MovingGameObject(screen, "green", screen.get_width() / 2, screen.get_height() / 2, 50, 100)
+butn = Button(screen, "blue", 50, screen.get_height() / 2, 100, 50)
+
 
 while running:
     
@@ -18,14 +23,15 @@ while running:
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("purple")
 
-    if(not circle):
-       circle = MovingGameObject(screen, pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2), "green", 50)
+    obj.draw()
+    butn.draw()
 
-    circle.draw()
-
+    #get needed events for controll
     keys = pygame.key.get_pressed()
+    mouse = pygame.mouse
 
-    circle.move(keys, dt)
+    obj.move(keys, dt)
+    butn.check_pressed(mouse)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
