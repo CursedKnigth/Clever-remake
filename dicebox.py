@@ -2,7 +2,7 @@ import pygame
 import random
 from button import *
 
-class DiceBox():
+class DiceBox(): # this oject will manage all of the dice and make sure that theyre placed properly
     def __init__(self, screen):
         self.screen = screen
         self.x1 = 5
@@ -18,8 +18,9 @@ class DiceBox():
     def draw(self):
         dice_box_width = len(self.active_dice)*120
         if(self.active_player==1):
-            a = 1
-            
+            i = 0
+            for dice in self.active_dice:
+
     def roll_dice(self):
         tem = []
         for i in self.active_dice:

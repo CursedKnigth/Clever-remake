@@ -1,6 +1,6 @@
 import pygame
 
-class GameObject:
+class GameObject: # base object
     def __init__(self, screen, colour, x, y, width, height):
         self.screen = screen
         self.x = x
@@ -8,6 +8,18 @@ class GameObject:
         self.colour = colour
         self.height = height
         self.width = width
+        self.visiable = 1
 
     def draw(self):
-        pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height))
+        if(self.visiable):
+            pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height))
+
+    def hide(self):
+        self.visiable = 0
+    
+    def show(self):
+        self.visiable = 1
+    
+    def set_pos(self, x, y):
+        self.x = x
+        self.y = y

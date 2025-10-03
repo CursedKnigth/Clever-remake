@@ -1,11 +1,17 @@
 import pygame
+import random
 from object import *
 
-class Button(GameObject):
-    def button_func(self):
-        self.x += 20
+class Button(GameObject): # base button object
+    def __init__(self, *args, **kwargs):
+        super(Button, self).__init__(*args, **kwargs)
+        self.was_pressed = 0
 
-    def check_mouse(self, mouse, was_pressed, func=0):
+    def button_func(self): # this is here just to test empty buttons
+        col = ["red", "green", "blue"]
+        self.colour = random.choice(col)
+
+    def check_mouse(self, mouse, was_pressed, func=0): 
         if(not func):
             func = self.button_func
         pressed = mouse.get_pressed()[0]
@@ -18,3 +24,4 @@ class Button(GameObject):
                 func()
             return 1
         return 0 
+    

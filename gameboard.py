@@ -1,6 +1,6 @@
 import pygame
 
-class GameBoard():
+class GameBoard(): # this is going to act as the page youd get in the physical game
     def __init__(self, screen, x, y):
         self.screen = screen
         self.x = x

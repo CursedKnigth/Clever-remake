@@ -1,7 +1,7 @@
 import pygame
 from object import *
 
-class MovingGameObject(GameObject):
+class MovingGameObject(GameObject): # this was just me testing pygame, probably not important for this project
     def move(self, keys, dt):
         if keys[pygame.K_w]:
             self.y -= 300 * dt
