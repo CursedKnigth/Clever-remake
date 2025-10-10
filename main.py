@@ -3,6 +3,7 @@ from movingobject import *
 from object import *
 from button import *
 from gameboard import *
+from dicebox import *
 
 # set up pygame
 pygame.init()
@@ -13,12 +14,14 @@ button_pressed = 0
 dt = 0
 
 # initiate objects
+surface = pygame.Surface((screen.get_width(), screen.get_height())) # needed for displaying fonts and images
 #obj = MovingGameObject(screen, "green", screen.get_width() / 2, screen.get_height() / 2, 50, 100)
-butn = Button(screen, "blue", 50, screen.get_height() / 2, 100, 50)
 line1 = GameObject(screen, "red", screen.get_width() / 11 * 5, 0, 1, screen.get_height())
 line2 = GameObject(screen, "red", screen.get_width() / 11 * 6, 0, 1, screen.get_height())
 line_top = GameObject(screen, "red", screen.get_width() / 2, screen.get_height() / 2, 50, 100)
 gameboard = GameBoard(screen, 5, 125)
+dicebox = DiceBox(screen)
+butn = Button(screen, "blue", 50, screen.get_height() / 2, 100, 50)
 
 
 while running:
@@ -36,13 +39,14 @@ while running:
     line2.draw()
     gameboard.draw()
     butn.draw()
+    dicebox.draw(surface)
 
     #get needed events for controll
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse
 
     #obj.move(keys, dt)
-    butn.check_mouse(mouse)
+    butn.check_mouse(mouse, func=dicebox.roll_dice)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
