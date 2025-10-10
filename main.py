@@ -31,24 +31,24 @@ while running:
     screen.fill("gray15")
 
     #obj.draw()
-    butn.draw()
+    
     line1.draw()
     line2.draw()
     gameboard.draw()
+    butn.draw()
 
     #get needed events for controll
     keys = pygame.key.get_pressed()
     mouse = pygame.mouse
 
     #obj.move(keys, dt)
-    button_pressed = butn.check_mouse(mouse, button_pressed)
+    butn.check_mouse(mouse)
 
     # flip() the display to put your work on screen
     pygame.display.flip()
 
     # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
+    # dt is delta time in seconds since last frame, used for framerate independent physics.
     dt = clock.tick(60) / 1000
 
 pygame.display.quit()

@@ -21,7 +21,7 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
             i = 0
             for dice in self.active_dice:
 
-    def roll_dice(self):
+    def roll_dice(self): 
         tem = []
         for i in self.active_dice:
             tem.append([random.randint(1, 6), i[1]])
