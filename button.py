@@ -18,7 +18,7 @@ class Button(GameObject): # base button object
         pressed = mouse.get_pressed()[0]
         mouse_pos = mouse.get_pos()
 
-        if(pressed):
+        if(pressed and self.active):
             if(mouse_pos[0]>self.x and mouse_pos[0]<self.x+self.width and
                 mouse_pos[1]>self.y and mouse_pos[1]<self.y+self.width and 
                 not self.was_pressed):

@@ -1,0 +1,6 @@
+YELLOW = "yellow"
+BLUE = "blue"
+GREEN = "green"
+PURPLE = "purple"
+ORANGE = "orange"
+WHITE = "white"

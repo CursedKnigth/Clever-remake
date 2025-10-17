@@ -1,5 +1,6 @@
 import pygame
 from button import *
+from constants import *
 
 class DiceButton(Button): # a modified button object meant to be used for the dice box
     def __init__(self, *args, **kwargs):
@@ -19,7 +20,7 @@ class DiceButton(Button): # a modified button object meant to be used for the di
                         6 : self.Font.render("6", False, "black")}
     
     def draw(self, screen):
-        dimmed_colours = {"yellow" : "gold3", "blue" : "darkblue", "green" : "green3", "purple" : "purple4", "orange" : "orange3", "white" : "grey80"}
+        dimmed_colours = {YELLOW : "darkgoldenrod", BLUE : "darkblue", GREEN : "green4", PURPLE : "purple4", ORANGE : "orange4", WHITE : "grey60"}
         r = 5
         if(self.visible):
             if(self.select_state == 0):
@@ -34,7 +35,6 @@ class DiceButton(Button): # a modified button object meant to be used for the di
             if(self.select_state == 2): # dims the colour
                 pygame.draw.rect(self.screen, dimmed_colours[self.colour], pygame.Rect(self.x, self.y, self.width, self.height),
                                 border_top_left_radius=r, border_top_right_radius=r, border_bottom_left_radius=r, border_bottom_right_radius=r)
-        # idk how ill write the number
         x = 15
         y = 0
         screen.blit(self.num_txt[self.number], (self.x + x, self.y + y))
@@ -50,3 +50,16 @@ class DiceButton(Button): # a modified button object meant to be used for the di
     
     def wipe_select(self):
         self.select_state = 0
+
+    def check_mouse(self, mouse, dicebox): # modifying the button function so it will use the function I want
+        pressed = mouse.get_pressed()[0]
+        mouse_pos = mouse.get_pos()
+
+        if(pressed and self.active):
+            if(mouse_pos[0]>self.x and mouse_pos[0]<self.x+self.width and
+                mouse_pos[1]>self.y and mouse_pos[1]<self.y+self.width and 
+                not self.was_pressed):
+                dicebox.pick_dice(self.colour)
+            self.was_pressed = 1
+        else:
+            self.was_pressed = 0
