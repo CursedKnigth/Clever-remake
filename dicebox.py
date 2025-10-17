@@ -23,14 +23,14 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
                              "white" : DiceButton(self.screen, "white", 0, 0, self.height, self.height)}
         self.reset_dice()
 
-    def draw(self, surface): #centering the dice over the board
+    def draw(self, screen): #centering the dice over the board
         dice_count = len(self.active_dice)
         if(self.active_player==1):
             dice_x_start = self.x1 + (self.width - (self.height+5)*dice_count)/2
             i = 0
             for dice in self.active_dice:
                 self.dice_objects[dice[1]].set_pos(dice_x_start + i*(self.height+5), self.y1)
-                self.dice_objects[dice[1]].draw(surface)
+                self.dice_objects[dice[1]].draw(screen)
                 i += 1
 
     def roll_dice(self): 

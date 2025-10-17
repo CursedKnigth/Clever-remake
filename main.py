@@ -39,7 +39,7 @@ while running:
     line2.draw()
     gameboard.draw()
     butn.draw()
-    dicebox.draw(surface)
+    dicebox.draw(screen)
 
     #get needed events for controll
     keys = pygame.key.get_pressed()
