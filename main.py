@@ -1,4 +1,12 @@
+# set up pygame
 import pygame
+pygame.init()
+screen = pygame.display.set_mode((1440, 920))
+clock = pygame.time.Clock()
+running = True
+dt = 0
+
+#import objects
 from movingobject import *
 from object import *
 from button import *
@@ -6,17 +14,10 @@ from gameboard import *
 from dicebox import *
 from constants import *
 
-# set up pygame
-pygame.init()
-screen = pygame.display.set_mode((1440, 920))
-clock = pygame.time.Clock()
-running = True
-dt = 0
-
 # initiate objects
 surface = pygame.Surface((screen.get_width(), screen.get_height())) # needed for displaying fonts and images
 #obj = MovingGameObject(screen, "green", screen.get_width() / 2, screen.get_height() / 2, 50, 100)
-line1 = GameObject(screen, "red", screen.get_width() / 11 * 5, 0, 1, screen.get_height())
+line1 = GameObject(screen, "red", screen.get_width() / 11 * 5, 0, 1, screen.get_height()) # right now most of this is temporary
 line2 = GameObject(screen, "red", screen.get_width() / 11 * 6, 0, 1, screen.get_height())
 line_top = GameObject(screen, "red", screen.get_width() / 2, screen.get_height() / 2, 50, 100)
 gameboard = GameBoard(screen, 5, 125)

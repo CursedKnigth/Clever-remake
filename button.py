@@ -26,14 +26,6 @@ class Button(GameObject): # base button object
             self.was_pressed = 1
         else:
             self.was_pressed = 0
-    
-    def hide(self):
-        super(Button, self).hide()
-        self.active = 0
-    
-    def show(self):
-        super(Button, self).show()
-        self.active = 1
 
     def deactivate(self):
         self.active = 0

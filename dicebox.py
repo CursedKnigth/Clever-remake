@@ -9,7 +9,7 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
         self.x1 = 5
         self.y1 = 10
         self.width = screen.get_width() / 11 * 5 - self.x1
-        self.height = 105
+        self.height = 102
         self.x2 = screen.get_width() / 11 * 6
         self.y2 = self.y1
         self.active_player = 1

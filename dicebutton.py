@@ -24,17 +24,12 @@ class DiceButton(Button): # a modified button object meant to be used for the di
         r = 5
         if(self.visible):
             if(self.select_state == 0):
-                pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height),
-                                border_top_left_radius=r, border_top_right_radius=r, border_bottom_left_radius=r, border_bottom_right_radius=r)
+                pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height), border_radius=r)
             if(self.select_state == 1): # adds a red border
-                pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height),
-                                border_top_left_radius=r, border_top_right_radius=r, border_bottom_left_radius=r, border_bottom_right_radius=r)
-                pygame.draw.rect(self.screen, "red", pygame.Rect(self.x, self.y, self.width, self.height),
-                                border_top_left_radius=r, border_top_right_radius=r, border_bottom_left_radius=r, border_bottom_right_radius=r,
-                                width=3)
+                pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height), border_radius=r)
+                pygame.draw.rect(self.screen, "red", pygame.Rect(self.x, self.y, self.width, self.height), border_top_left_radius=r, width=3)
             if(self.select_state == 2): # dims the colour
-                pygame.draw.rect(self.screen, dimmed_colours[self.colour], pygame.Rect(self.x, self.y, self.width, self.height),
-                                border_top_left_radius=r, border_top_right_radius=r, border_bottom_left_radius=r, border_bottom_right_radius=r)
+                pygame.draw.rect(self.screen, dimmed_colours[self.colour], pygame.Rect(self.x, self.y, self.width, self.height), border_radius=r)
         x = 15
         y = 0
         screen.blit(self.num_txt[self.number], (self.x + x, self.y + y))
