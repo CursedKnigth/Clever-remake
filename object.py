@@ -1,7 +1,7 @@
 import pygame
 
 class GameObject: # base object
-    def __init__(self, screen, colour, x, y, width, height, r=0, border_width=0, border_colour=0):
+    def __init__(self, screen, colour, x, y, width, height, r=0, border_width=0, border_colour=0, text=0, surface=0):
         self.screen = screen
         self.x = x
         self.y = y
@@ -12,12 +12,16 @@ class GameObject: # base object
         self.r = r
         self.border_width = border_width
         self.border_colour = border_colour
+        self.text = text
+        self.surface = surface
 
     def draw(self):
         if(self.visible):
             pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height), border_radius=self.r)
             if(self.border_width!=0):
                 pygame.draw.rect(self.screen, self.border_colour, pygame.Rect(self.x, self.y, self.width, self.height), width=self.border_width, border_radius=self.r)
+            if(self.text!=0):
+                self.screen.blit(self.text, (self.x, self.y))
 
     def hide(self):
         self.visible = 0
@@ -28,3 +32,13 @@ class GameObject: # base object
     def set_pos(self, x, y):
         self.x = x
         self.y = y
+    
+    def set_colour(self, colour):
+        self.colour = colour
+    
+    def set_border(self, x, colour):
+        self.border_width = x
+        self.border_colour = colour
+
+    def set_text(self, text):
+        self.text = text
