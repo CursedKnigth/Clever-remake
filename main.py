@@ -15,6 +15,9 @@ game = Game(screen, mouse)
 while running:
     
     for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            game.check_mouse()
+        
         if event.type == pygame.QUIT:
             running = False
 

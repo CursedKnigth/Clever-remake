@@ -22,3 +22,8 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
         self.screen.blit(self.board_img, (self.x+9, self.y+178))
         self.yellow_game_board.draw()
         
+    def check_mouse(self, mouse):
+        self.yellow_game_board.check_mouse(mouse)
+
+    def check_dice(self, dicebox):
+        self.yellow_game_board.check_dice(dicebox)
