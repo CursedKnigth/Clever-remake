@@ -15,15 +15,26 @@ class GameObject: # base object
         self.text = text
         self.surface = surface
         self.empty = empty
+        self.cross_offset1 = 0
+        self.cross_offset2 = 0
+        self.cross_colour = 0
 
     def draw(self):
         if(self.visible):
             if(not self.empty):
                 pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height), border_radius=self.r)
+            
             if(self.border_width!=0):
                 pygame.draw.rect(self.screen, self.border_colour, pygame.Rect(self.x, self.y, self.width, self.height), width=self.border_width, border_radius=self.r)
+            
             if(self.text!=0):
                 self.screen.blit(self.text, (self.x, self.y))
+            
+            if(self.cross_colour):
+                pygame.draw.polygon(self.screen, self.cross_colour, ((self.x), 
+                                                                     (), 
+                                                                     (), 
+                                                                     ()))
 
     def hide(self):
         self.visible = 0
@@ -38,9 +49,17 @@ class GameObject: # base object
     def set_colour(self, colour):
         self.colour = colour
     
-    def set_border(self, x, colour):
-        self.border_width = x
+    def set_border(self, width, colour):
+        self.border_width = width
         self.border_colour = colour
 
     def set_text(self, text):
         self.text = text
+
+    def set_empty(self, x):
+        self.empty = x
+    
+    def set_cross(self, offset1, offset2, colour):
+        self.cross_offset_x = offset1
+        self.cross_offset_y = offset2
+        self.cross_colour = colour
