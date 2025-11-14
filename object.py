@@ -12,23 +12,26 @@ class GameObject: # base object
         self.r = r
         self.border_width = border_width
         self.border_colour = border_colour
+        self.og_text = text
         self.text = text
         self.surface = surface
         self.empty = empty
         self.cross_offset1 = 0
         self.cross_offset2 = 0
         self.cross_colour = 0
+        self.current_scale = 1
 
     def draw(self):
+        scale = self.screen.get_width()/1440
         if(self.visible):
             if(not self.empty):
-                pygame.draw.rect(self.screen, self.colour, pygame.Rect(self.x, self.y, self.width, self.height), border_radius=self.r)
+                pygame.draw.rect(self.screen, self.colour, pygame.Rect(int(self.x*scale), int(self.y*scale), int(self.width*scale), int(self.height*scale)), border_radius=int(self.r*scale))
             
             if(self.border_width!=0):
-                pygame.draw.rect(self.screen, self.border_colour, pygame.Rect(self.x, self.y, self.width, self.height), width=self.border_width, border_radius=self.r)
+                pygame.draw.rect(self.screen, self.border_colour, pygame.Rect(int(self.x*scale), int(self.y*scale), int(self.width*scale), int(self.height*scale)), width=int(self.border_width*scale), border_radius=int(self.r*scale))
             
             if(self.text!=0):
-                self.screen.blit(self.text, (self.x, self.y))
+                self.screen.blit(self.text, (int(self.x*scale), int(self.y*scale)))
             
             if(self.cross_colour):
                 pygame.draw.polygon(self.screen, self.cross_colour, ((self.x), 
