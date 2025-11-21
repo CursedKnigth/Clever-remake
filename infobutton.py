@@ -14,6 +14,9 @@ class InfoButton(Button):
     def get_info(self):
         return self.info
     
+    def set_info(self, x):
+        self.info = x
+    
     def check_mouse(self, mouse): # function for checking if the button is pressed and running the associated function
         scale = self.screen.get_width()/1440
         if(not self.func):

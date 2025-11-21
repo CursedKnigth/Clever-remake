@@ -1,9 +1,10 @@
 import pygame
 import images
 from yellowboard import *
+from blueboard import *
 
 class GameBoard(): # this is going to act as the page youd get in the physical game
-    def __init__(self, screen, x, y):
+    def __init__(self, screen, x, y, dicebox):
         self.screen = screen
         self.x = x
         self.y = y
@@ -13,7 +14,8 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
         self.default_img_width = self.board_img.get_width()
         self.default_img_height = self.board_img.get_height()
         self.warped_board_img = self.board_img
-        self.yellow_game_board = YellowGameBoard(screen, self.x, self.y)
+        self.yellow_game_board = YellowGameBoard(screen, self.x, self.y, dicebox)
+        self.blue_game_board = BlueGameBoard(screen, self.x, self.y, dicebox)
         self.current_scale = 1
 
     def draw(self):
@@ -29,9 +31,12 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
             self.current_scale = scale
         self.screen.blit(self.warped_board_img, ((self.x+9)*scale, (self.y+178)*scale))
         self.yellow_game_board.draw()
+        self.blue_game_board.draw()
         
     def check_mouse(self, mouse):
         self.yellow_game_board.check_mouse(mouse)
+        self.blue_game_board.check_mouse(mouse)
 
-    def check_dice(self, dicebox):
-        self.yellow_game_board.check_dice(dicebox)
+    def check_dice(self):
+        self.yellow_game_board.check_dice()
+        self.blue_game_board.check_dice()

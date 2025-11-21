@@ -17,7 +17,7 @@ class Game:
         self.line2 = GameObject(self.screen, "red", self.screen.get_width() / 11 * 6, 0, 1, self.screen.get_height())
         self.line_top = GameObject(self.screen, "red", self.screen.get_width() / 2, self.screen.get_height() / 2, 50, 100)
         self.dicebox = DiceBox(self.screen)
-        self.gameboard = GameBoard(self.screen, 5, 125)
+        self.gameboard = GameBoard(self.screen, 5, 125, self.dicebox)
         self.butn = Button(self.screen, "blue", 950, self.screen.get_height() / 2, 100, 50, func=self.dicebox.roll_dice)
         self.butn2 = Button(self.screen, "red", 1100, self.screen.get_height() / 2, 100, 50, func=self.dicebox.confirm_pick)
         self.butn3 = Button(self.screen, "green", 1250, self.screen.get_height() / 2, 100, 50, func=self.dicebox.reset_dice)
@@ -31,7 +31,7 @@ class Game:
         self.butn3.draw()
         self.dicebox.draw()
 
-        self.gameboard.check_dice(self.dicebox)
+        self.gameboard.check_dice()
     
     def check_mouse(self):
         self.butn.check_mouse(self.mouse)

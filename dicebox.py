@@ -42,6 +42,8 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
                             4 : self.Font.render("4", False, "black"),
                             5 : self.Font.render("5", False, "black"),
                             6 : self.Font.render("6", False, "black")}
+            for i in self.active_dice:
+                self.dice_objects[i[1]].set_text(self.num_to_txt[i[0]])
             self.current_scale = scale
 
         dice_count = len(self.active_dice)
@@ -60,7 +62,10 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
             self.dice_objects[i[1]].set_border(0, "red")
             tem.append([random.randint(1, 6), i[1]])
         self.active_dice = sorted(tem, reverse=1)
+        self.white_n_blue_val = 0
         for i in self.active_dice:
+            if(i[1]==WHITE or i[1]==BLUE):
+                self.white_n_blue_val += i[0]
             self.dice_objects[i[1]].set_text(self.num_to_txt[i[0]])
         self.picked_dice = [0, 0]
     
@@ -98,3 +103,10 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
     def check_mouse(self, mouse):
        for i in self.dice_objects.values():
            i.check_mouse(mouse)
+    
+    def get_dice_val(self, color):
+        x = 0
+        for i in self.active_dice:
+            if(i[1]==color):
+                x = i[0]
+        return x
