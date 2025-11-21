@@ -13,6 +13,7 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
         self.x2 = screen.get_width() / 11 * 6
         self.y2 = self.y1
         self.active_player = 1
+        self.current_scale = 1
 
         self.Font=pygame.font.SysFont('timesnewroman',  90)
         self.num_to_txt = {1 : self.Font.render("1", False, "black"),
@@ -32,6 +33,17 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
         self.reset_dice()
 
     def draw(self): #centering the dice over the board
+        scale = self.screen.get_width()/1440
+        if(scale!=self.current_scale):
+            self.Font=pygame.font.SysFont('timesnewroman',  int(90*scale))
+            self.num_to_txt = {1 : self.Font.render("1", False, "black"),
+                            2 : self.Font.render("2", False, "black"),
+                            3 : self.Font.render("3", False, "black"),
+                            4 : self.Font.render("4", False, "black"),
+                            5 : self.Font.render("5", False, "black"),
+                            6 : self.Font.render("6", False, "black")}
+            self.current_scale = scale
+
         dice_count = len(self.active_dice)
         if(self.active_player==1):
             dice_x_start = self.x1 + (self.width - (self.height+5)*dice_count)/2

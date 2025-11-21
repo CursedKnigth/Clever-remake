@@ -34,10 +34,15 @@ class GameObject: # base object
                 self.screen.blit(self.text, (int(self.x*scale), int(self.y*scale)))
             
             if(self.cross_colour):
-                pygame.draw.polygon(self.screen, self.cross_colour, ((self.x), 
-                                                                     (), 
-                                                                     (), 
-                                                                     ()))
+                pygame.draw.polygon(self.screen, self.cross_colour, (((self.x+self.cross_offset1)*scale, (self.y+self.cross_offset2)*scale), 
+                                                                     ((self.x+self.cross_offset2)*scale, (self.y+self.cross_offset1)*scale), 
+                                                                     ((self.x+self.width-self.cross_offset1)*scale, (self.y+self.height-self.cross_offset2)*scale), 
+                                                                     ((self.x+self.width-self.cross_offset2)*scale, (self.y+self.height-self.cross_offset1)*scale)))
+                
+                pygame.draw.polygon(self.screen, self.cross_colour, (((self.x+self.width-self.cross_offset1)*scale, (self.y+self.cross_offset2)*scale), 
+                                                                     ((self.x+self.width-self.cross_offset2)*scale, (self.y+self.cross_offset1)*scale), 
+                                                                     ((self.x+self.cross_offset1)*scale, (self.y+self.height-self.cross_offset2)*scale), 
+                                                                     ((self.x+self.cross_offset2)*scale, (self.y+self.height-self.cross_offset1)*scale)))
 
     def hide(self):
         self.visible = 0
@@ -63,6 +68,6 @@ class GameObject: # base object
         self.empty = x
     
     def set_cross(self, offset1, offset2, colour):
-        self.cross_offset_x = offset1
-        self.cross_offset_y = offset2
+        self.cross_offset1 = offset1
+        self.cross_offset2 = offset2
         self.cross_colour = colour

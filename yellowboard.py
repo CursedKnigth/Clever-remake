@@ -23,6 +23,7 @@ class YellowGameBoard():
             for j in range(4):
                 if(self.button_objects[i][j].get_info()==0):
                     self.button_objects[i][j].set_border(0, "white")
+                    self.button_objects[i][j].set_cross(6, 9, "black")
 
         self.hide_n_deactivate()
     
