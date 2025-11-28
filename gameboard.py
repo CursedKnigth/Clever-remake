@@ -16,6 +16,7 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
         self.warped_board_img = self.board_img
         self.yellow_game_board = YellowGameBoard(screen, self.x, self.y, dicebox)
         self.blue_game_board = BlueGameBoard(screen, self.x, self.y, dicebox)
+        self.green_game_board = BlueGameBoard(screen, self.x, self.y, dicebox)
         self.current_scale = 1
 
     def draw(self):
@@ -32,11 +33,14 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
         self.screen.blit(self.warped_board_img, ((self.x+9)*scale, (self.y+178)*scale))
         self.yellow_game_board.draw()
         self.blue_game_board.draw()
+        self.green_game_board.draw()
         
-    def check_mouse(self, mouse):
-        self.yellow_game_board.check_mouse(mouse)
-        self.blue_game_board.check_mouse(mouse)
+    def check_mouse(self, mouse, event):
+        self.yellow_game_board.check_mouse(mouse, event)
+        self.blue_game_board.check_mouse(mouse, event)
+        self.green_game_board.check_mouse(mouse, event)
 
     def check_dice(self):
         self.yellow_game_board.check_dice()
         self.blue_game_board.check_dice()
+        self.green_game_board.check_dice()

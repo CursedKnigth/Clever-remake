@@ -28,10 +28,10 @@ class BlueGameBoard():
             for j in range(4):
                 self.button_objects[i][j].draw()
     
-    def check_mouse(self, mouse):
+    def check_mouse(self, mouse, event):
         for i in range(3):
             for j in range(4):
-                self.button_objects[i][j].check_mouse(mouse)
+                self.button_objects[i][j].check_mouse(mouse, event)
 
     def hide_n_deactivate(self):
         for i in range(3):

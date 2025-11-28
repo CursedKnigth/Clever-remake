@@ -100,9 +100,9 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
         self.active_dice = tem
         self.roll_dice()
 
-    def check_mouse(self, mouse):
+    def check_mouse(self, mouse, event):
        for i in self.dice_objects.values():
-           i.check_mouse(mouse)
+           i.check_mouse(mouse, event)
     
     def get_dice_val(self, color):
         x = 0

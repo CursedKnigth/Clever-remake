@@ -33,9 +33,9 @@ class Game:
 
         self.gameboard.check_dice()
     
-    def check_mouse(self):
-        self.butn.check_mouse(self.mouse)
-        self.butn2.check_mouse(self.mouse)
-        self.butn3.check_mouse(self.mouse)
-        self.dicebox.check_mouse(self.mouse)
-        self.gameboard.check_mouse(self.mouse)
+    def check_mouse(self, event):
+        self.butn.check_mouse(self.mouse, event)
+        self.butn2.check_mouse(self.mouse, event)
+        self.butn3.check_mouse(self.mouse, event)
+        self.dicebox.check_mouse(self.mouse, event)
+        self.gameboard.check_mouse(self.mouse, event)

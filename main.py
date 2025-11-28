@@ -16,7 +16,7 @@ while running:
     
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
-            game.check_mouse()
+            game.check_mouse(event)
         
         if event.type == pygame.QUIT:
             running = False
