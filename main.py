@@ -1,12 +1,19 @@
 # set up pygame
 import pygame
+#import ctypes
+from constants import *
 pygame.init()
-screen = pygame.display.set_mode((1440, 920), pygame.RESIZABLE)
+screen = pygame.display.set_mode((DEF_SCREEN_WIDTH, 920), pygame.RESIZABLE)
 clock = pygame.time.Clock()
 running = True
 dt = 0
 surface = pygame.Surface((screen.get_width(), screen.get_height())) # needed for displaying fonts and images
 mouse = pygame.mouse
+"""
+user32 = ctypes.windll.user32
+screensize = (user32.GetSystemMetrics(0), user32.GetSystemMetrics(1))
+print("Screen Resolution:", screensize)
+"""
 
 from game import *
 

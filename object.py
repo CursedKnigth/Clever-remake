@@ -1,4 +1,5 @@
 import pygame
+from constants import *
 
 class GameObject: # base object
     def __init__(self, screen, colour, x, y, width, height, r=0, border_width=0, border_colour=0, text=0, surface=0, empty=0):
@@ -22,7 +23,7 @@ class GameObject: # base object
         self.current_scale = 1
 
     def draw(self):
-        scale = self.screen.get_width()/1440
+        scale = self.screen.get_width()/DEF_SCREEN_WIDTH
         if(self.visible):
             if(not self.empty):
                 pygame.draw.rect(self.screen, self.colour, pygame.Rect(int(self.x*scale), int(self.y*scale), int(self.width*scale), int(self.height*scale)), border_radius=int(self.r*scale))

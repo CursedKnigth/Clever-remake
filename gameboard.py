@@ -2,6 +2,8 @@ import pygame
 import images
 from yellowboard import *
 from blueboard import *
+from greenboard import *
+from constants import *
 
 class GameBoard(): # this is going to act as the page youd get in the physical game
     def __init__(self, screen, x, y, dicebox):
@@ -16,7 +18,7 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
         self.warped_board_img = self.board_img
         self.yellow_game_board = YellowGameBoard(screen, self.x, self.y, dicebox)
         self.blue_game_board = BlueGameBoard(screen, self.x, self.y, dicebox)
-        self.green_game_board = BlueGameBoard(screen, self.x, self.y, dicebox)
+        self.green_game_board = GreenGameBoard(screen, self.x, self.y, dicebox)
         self.current_scale = 1
 
     def draw(self):
@@ -26,7 +28,7 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
                          pygame.Rect(self.x, self.y, self.width, self.height),
                          border_top_left_radius=r, border_top_right_radius=r, border_bottom_left_radius=r, border_bottom_right_radius=r)
         """
-        scale = self.screen.get_width()/1440
+        scale = self.screen.get_width()/DEF_SCREEN_WIDTH
         if(scale!=self.current_scale):
             self.warped_board_img = pygame.transform.scale(self.board_img, (self.default_img_width*scale, self.default_img_height*scale))
             self.current_scale = scale

@@ -1,6 +1,7 @@
 import pygame
 import random
 from button import *
+from constants import *
 
 class InfoButton(Button):
     def __init__(self, screen, colour, x, y, width, height, r=0, border_width=0, border_colour=0, text=0, surface=0, func=0, info=0, empty=0):
@@ -18,7 +19,7 @@ class InfoButton(Button):
         self.info = x
     
     def check_mouse(self, mouse, event): # function for checking if the button is pressed and running the associated function
-        scale = self.screen.get_width()/1440
+        scale = self.screen.get_width()/DEF_SCREEN_WIDTH
         if(not self.func):
             self.func = self.button_func
         mouse_pos = mouse.get_pos()

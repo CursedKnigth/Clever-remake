@@ -10,3 +10,4 @@ DIMMED_COLOURS_MAP = {YELLOW : "darkgoldenrod", BLUE : "darkblue", GREEN : "gree
 MENU = 0
 GAME_RUNNING = 1
 TUTORIAL = 2
+DEF_SCREEN_WIDTH = 1440

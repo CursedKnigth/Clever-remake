@@ -8,10 +8,10 @@ class GreenGameBoard():
         self.y = y
         self.dicebox = dicebox
 
-        self.board_arrangememt = [0, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6]
-        x0 = 10
-        y0 = 10
-        dx = 55.9
+        self.board_arrangememt = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6]
+        x0 = 83
+        y0 = 518
+        dx = 49.1
         bh = 44.5
         br = 10
         self.button_objects = [InfoButton(screen, "white", self.x+i*dx+x0, self.y+y0, bh, bh, r = br, info = self.board_arrangememt[i], empty=self.board_arrangememt[i]!=0, border_colour="red", border_width=4, func=self.confirm_pick)
@@ -27,7 +27,7 @@ class GreenGameBoard():
 
     def hide_n_deactivate(self):
         for i in range(11):
-            if(self.button_objects[i].get_info()!=0):
+            if(self.button_objects[i].get_info()>0):
                 self.button_objects[i].hide()
             self.button_objects[i].deactivate()
     
@@ -36,11 +36,10 @@ class GreenGameBoard():
         dice = self.dicebox.get_picked_dice()
         if(dice[1]==GREEN or dice[1]==WHITE):
             x = dice[0]
-            for i in range(3):
-                for j in range(4):
-                    if(self.button_objects[i][j].get_info()==x):
-                        self.button_objects[i][j].show()
-                        self.button_objects[i][j].activate()
+            for i in range(11):
+                if(self.button_objects[i].get_info()==x):
+                    self.button_objects[i].show()
+                    self.button_objects[i].activate()
     
     def confirm_pick(self, dice):
         dice.set_border(0, "white")

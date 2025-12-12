@@ -33,7 +33,7 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
         self.reset_dice()
 
     def draw(self): #centering the dice over the board
-        scale = self.screen.get_width()/1440
+        scale = self.screen.get_width()/DEF_SCREEN_WIDTH
         if(scale!=self.current_scale):
             self.Font=pygame.font.SysFont('timesnewroman',  int(90*scale))
             self.num_to_txt = {1 : self.Font.render("1", False, "black"),
