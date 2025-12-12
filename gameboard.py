@@ -46,3 +46,8 @@ class GameBoard(): # this is going to act as the page youd get in the physical g
         self.yellow_game_board.check_dice()
         self.blue_game_board.check_dice()
         self.green_game_board.check_dice()
+    
+    def hide_n_deactivate(self):
+        self.yellow_game_board.hide_n_deactivate()
+        self.blue_game_board.hide_n_deactivate()
+        self.green_game_board.hide_n_deactivate()

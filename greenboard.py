@@ -17,6 +17,7 @@ class GreenGameBoard():
         br = 10
         self.button_objects = [InfoButton(screen, "white", self.x+i*dx+x0, self.y+y0, bh, bh, r = br, info = self.board_arrangememt[i], empty=self.board_arrangememt[i]!=0, border_colour="red", border_width=4, func=self.confirm_pick)
                                 for i in range(11)]
+        self.hide_n_deactivate()
     
     def draw(self):
         for i in range(11):

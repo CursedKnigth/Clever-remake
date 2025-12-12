@@ -12,30 +12,45 @@ class Game:
         self.gamestate = GAME_RUNNING
         self.screen = screen
         self.mouse = mouse
+        self.active_player = 1
 
-        self.line1 = GameObject(self.screen, "red", self.screen.get_width() / 11 * 5, 0, 1, self.screen.get_height()) # right now most of this is temporary
-        self.line2 = GameObject(self.screen, "red", self.screen.get_width() / 11 * 6, 0, 1, self.screen.get_height())
-        self.line_top = GameObject(self.screen, "red", self.screen.get_width() / 2, self.screen.get_height() / 2, 50, 100)
         self.dicebox = DiceBox(self.screen)
-        self.gameboard = GameBoard(self.screen, 5, 125, self.dicebox)
-        self.butn = Button(self.screen, "blue", 950, self.screen.get_height() / 2, 100, 50, func=self.dicebox.roll_dice)
-        self.butn2 = Button(self.screen, "red", 1100, self.screen.get_height() / 2, 100, 50, func=self.dicebox.confirm_pick)
-        self.butn3 = Button(self.screen, "green", 1250, self.screen.get_height() / 2, 100, 50, func=self.dicebox.reset_dice)
+        self.gameboard1 = GameBoard(self.screen, 5, 125, self.dicebox)
+        self.gameboard2 = GameBoard(self.screen, 5 + self.screen.get_width() / 11 * 6, 125, self.dicebox)
+
+        self.Font=pygame.font.SysFont('timesnewroman',  35)
+        self.butn = Button(self.screen, "white", 950, self.screen.get_height() / 5, 100, 50, func=self.dicebox.roll_dice, text=self.Font.render("roll", False, "black"))
+        self.butn2 = Button(self.screen, "white", 1100, self.screen.get_height() / 5, 100, 50, func=self.dicebox.confirm_pick, text=self.Font.render("pick", False, "black"))
+        self.butn3 = Button(self.screen, "white", 1250, self.screen.get_height() / 5, 100, 50, func=self.dicebox.reset_dice, text=self.Font.render("reset-d", False, "black"))
+        self.butn4 = Button(self.screen, "white", 1250, self.screen.get_height() / 5 - 80, 100, 50, func=self.end_turn, text=self.Font.render("switch", False, "black"))
     
     def tick(self, keys):
-        self.line1.draw()
-        self.line2.draw()
-        self.gameboard.draw()
+        self.gameboard1.draw()
+        self.gameboard2.draw()
         self.butn.draw()
         self.butn2.draw()
         self.butn3.draw()
+        self.butn4.draw()
         self.dicebox.draw()
 
-        self.gameboard.check_dice()
+        if(self.active_player==1):
+            self.gameboard1.check_dice()
+        elif(self.active_player==2):
+            self.gameboard2.check_dice()
     
     def check_mouse(self, event):
         self.butn.check_mouse(self.mouse, event)
         self.butn2.check_mouse(self.mouse, event)
         self.butn3.check_mouse(self.mouse, event)
+        self.butn4.check_mouse(self.mouse, event)
         self.dicebox.check_mouse(self.mouse, event)
-        self.gameboard.check_mouse(self.mouse, event)
+        self.gameboard1.check_mouse(self.mouse, event)
+        self.gameboard2.check_mouse(self.mouse, event)
+
+    def end_turn(self):
+        if(self.active_player==1):
+            self.gameboard1.hide_n_deactivate()
+            self.active_player = 2
+        else:
+            self.gameboard2.hide_n_deactivate()
+            self.active_player = 1

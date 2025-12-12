@@ -110,3 +110,6 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
             if(i[1]==color):
                 x = i[0]
         return x
+    
+    def set_active_player(self, x):
+        self.active_player = x
