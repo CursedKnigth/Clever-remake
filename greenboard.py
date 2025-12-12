@@ -7,6 +7,7 @@ class GreenGameBoard():
         self.x = x
         self.y = y
         self.dicebox = dicebox
+        self.current_pos = 0
 
         self.board_arrangememt = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6]
         x0 = 83
@@ -36,12 +37,13 @@ class GreenGameBoard():
         dice = self.dicebox.get_picked_dice()
         if(dice[1]==GREEN or dice[1]==WHITE):
             x = dice[0]
-            for i in range(11):
-                if(self.button_objects[i].get_info()==x):
-                    self.button_objects[i].show()
-                    self.button_objects[i].activate()
+            if(self.button_objects[self.current_pos].get_info()<=x):
+                self.button_objects[self.current_pos].show()
+                self.button_objects[self.current_pos].activate()
+                    
     
     def confirm_pick(self, dice):
+        self.current_pos += 1
         dice.set_border(0, "white")
         dice.set_cross(6, 9, "black")
         dice.set_info(0)
