@@ -54,6 +54,13 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
                 self.dice_objects[dice[1]].set_pos(dice_x_start + i*(self.height+5), self.y1)
                 self.dice_objects[dice[1]].draw()
                 i += 1
+        else:
+            dice_x_start = self.screen.get_width() / 11 * 6 + (self.width - (self.height+5)*dice_count)/2
+            i = 0
+            for dice in self.active_dice:
+                self.dice_objects[dice[1]].set_pos(dice_x_start + i*(self.height+5), self.y1)
+                self.dice_objects[dice[1]].draw()
+                i += 1
 
     def roll_dice(self): 
         tem = []
@@ -62,15 +69,16 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
             self.dice_objects[i[1]].set_border(0, "red")
             tem.append([random.randint(1, 6), i[1]])
         self.active_dice = sorted(tem, reverse=1)
-        self.white_n_blue_val = 0
         for i in self.active_dice:
-            if(i[1]==WHITE or i[1]==BLUE):
-                self.white_n_blue_val += i[0]
             self.dice_objects[i[1]].set_text(self.num_to_txt[i[0]])
-        self.picked_dice = [0, 0]
+        self.active_picked_dice = [0, 0]
+        self.plate_picked_dice = [0, 0]
     
     def reset_dice(self):
         self.active_dice = [[0, YELLOW], [0, BLUE], [0, GREEN], [0, PURPLE], [0, ORANGE], [0, WHITE]]
+        self.plate_dice = []
+        self.inactive_dice = []
+
         for i in self.dice_objects.values():
             i.activate()
         self.roll_dice()
@@ -80,25 +88,38 @@ class DiceBox(): # this oject will manage all of the dice and make sure that the
             self.dice_objects[i[1]].set_colour(i[1])
             self.dice_objects[i[1]].set_border(0, "red")
             if(i[1]==dice.get_info()):
-                self.picked_dice = i
+                self.active_picked_dice = i
+                self.plate_picked_dice = [0, 0]
+        
+        for i in self.plate_dice:
+            self.dice_objects[i[1]].set_colour(i[1])
+            self.dice_objects[i[1]].set_border(0, "red")
+            if(i[1]==dice.get_info()):
+                self.active_picked_dice = [0, 0]
+                self.plate_picked_dice = i
             
         self.dice_objects[dice.get_info()].set_border(3, "red")
         for i in self.active_dice:
-            if(i[0]<self.picked_dice[0]):
+            if(i[0]<self.active_picked_dice[0]):
                 self.dice_objects[i[1]].set_colour(DIMMED_COLOURS_MAP[i[1]])
     
     def get_picked_dice(self):
-        return self.picked_dice 
+        return self.active_picked_dice 
     
     def confirm_pick(self):
-        tem = []
-        for i in self.active_dice:
-            if(i[0]>=self.picked_dice[0] and self.picked_dice[1]!=i[1]):
-                tem.append(i)
-            else:
-                self.dice_objects[i[1]].deactivate()
-        self.active_dice = tem
-        self.roll_dice()
+        if(self.active_picked_dice!=[0, 0]):
+            tem = []
+            for i in self.active_dice:
+                if(self.active_picked_dice[1]==i[1]):
+                    self.inactive_dice.append(i)
+                    self.dice_objects[i[1]].deactivate()
+                elif(i[0]>=self.active_picked_dice[0]):
+                    tem.append(i)
+                else:
+                    self.plate_dice.append(i)
+            self.active_dice = tem
+            self.roll_dice()
+        
 
     def check_mouse(self, mouse, event):
        for i in self.dice_objects.values():

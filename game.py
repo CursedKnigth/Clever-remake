@@ -13,18 +13,28 @@ class Game:
         self.screen = screen
         self.mouse = mouse
         self.active_player = 1
+        self.current_scale = 1
 
         self.dicebox = DiceBox(self.screen)
         self.gameboard1 = GameBoard(self.screen, 5, 125, self.dicebox)
         self.gameboard2 = GameBoard(self.screen, 5 + self.screen.get_width() / 11 * 6, 125, self.dicebox)
 
         self.Font=pygame.font.SysFont('timesnewroman',  35)
-        self.butn = Button(self.screen, "white", 950, self.screen.get_height() / 5, 100, 50, func=self.dicebox.roll_dice, text=self.Font.render("roll", False, "black"))
-        self.butn2 = Button(self.screen, "white", 1100, self.screen.get_height() / 5, 100, 50, func=self.dicebox.confirm_pick, text=self.Font.render("pick", False, "black"))
-        self.butn3 = Button(self.screen, "white", 1250, self.screen.get_height() / 5, 100, 50, func=self.dicebox.reset_dice, text=self.Font.render("reset-d", False, "black"))
-        self.butn4 = Button(self.screen, "white", 1250, self.screen.get_height() / 5 - 80, 100, 50, func=self.end_turn, text=self.Font.render("switch", False, "black"))
+        self.butn = Button(self.screen, "lightgreen", 950, self.screen.get_height() / 5, 100, 50, func=self.dicebox.roll_dice, text=self.Font.render("roll", False, "black"))
+        self.butn2 = Button(self.screen, "lightgreen", 1100, self.screen.get_height() / 5, 100, 50, func=self.dicebox.confirm_pick, text=self.Font.render("pick", False, "black"))
+        self.butn3 = Button(self.screen, "lightgreen", 1250, self.screen.get_height() / 5, 100, 50, func=self.dicebox.reset_dice, text=self.Font.render("reset-d", False, "black"))
+        self.butn4 = Button(self.screen, "lightgreen", 800, self.screen.get_height() / 5, 100, 50, func=self.end_turn, text=self.Font.render("switch", False, "black"))
     
     def tick(self, keys):
+        scale = self.screen.get_width()/DEF_SCREEN_WIDTH
+        if(scale!=self.current_scale):
+            self.current_scale = scale
+            self.Font=pygame.font.SysFont('timesnewroman',  int(35*scale))
+            self.butn.set_text(self.Font.render("roll", False, "black"))
+            self.butn2.set_text(self.Font.render("pick", False, "black"))
+            self.butn3.set_text(self.Font.render("reset-d", False, "black"))
+            self.butn4.set_text(self.Font.render("switch", False, "black"))
+
         self.gameboard1.draw()
         self.gameboard2.draw()
         self.butn.draw()
@@ -49,8 +59,10 @@ class Game:
 
     def end_turn(self):
         if(self.active_player==1):
+            self.dicebox.set_active_player(2)
             self.gameboard1.hide_n_deactivate()
             self.active_player = 2
         else:
+            self.dicebox.set_active_player(1)
             self.gameboard2.hide_n_deactivate()
             self.active_player = 1
